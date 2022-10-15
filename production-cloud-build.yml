@@ -1,0 +1,23 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        docker pull gcr.io/geekstart-production/sakko-demo-api:latest || exit 0
+  - name: gcr.io/cloud-builders/docker
+    timeout: 1200s
+    args:
+      [
+        "build",
+        "-f",
+        "Dockerfile.production",
+        "-t",
+        "gcr.io/geekstart-production/sakko-demo-api",
+        "--cache-from",
+        "gcr.io/geekstart-production/sakko-demo-api:latest",
+        ".",
+      ]
+timeout: 1200s
+images:
+  - gcr.io/geekstart-production/sakko-demo-api

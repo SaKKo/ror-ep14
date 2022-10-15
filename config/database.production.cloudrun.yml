@@ -1,0 +1,11 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+production:
+  <<: *default
+  host: "<%= ENV.fetch('DB_SOCKET_DIR') { '/cloudsql' } %>/<%= ENV['INSTANCE_CONNECTION_NAME'] %>"
+  database: sakko_demo_api
+  username: sakko_demo_api
+  password: <%= Rails.application.credentials.production_db_password %>

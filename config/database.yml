@@ -80,6 +80,9 @@ test:
 #
 production:
   <<: *default
-  database: workshop_login_rest_production
-  username: workshop_login_rest
-  password: <%= ENV['WORKSHOP_LOGIN_REST_DATABASE_PASSWORD'] %>
+  port: 5431
+  host: 127.0.0.1
+  database: sakko_demo_api
+  username: sakko_demo_api
+  password: <%= Rails.application.credentials.production_db_password %>
+  socket: "/cloudsql/geekstart-production:asia-southeast1:database-for-serverless-apps"
